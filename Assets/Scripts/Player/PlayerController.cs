@@ -4,20 +4,28 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // 测试git
+
     public float moveSpeed;
 
-    public bool isMove;
+    private bool isMove;
 
     private Vector2 input;
 
-    private void Update() {
+    private void Update() 
+    {
         if(!isMove)
         {
-            
+            input.x = Input.GetAxisRaw("Horizontal");
+            input.y = Input.GetAxisRaw("Vertical");
 
+            if(input != Vector2.zero)
+            {
+                var targetPos = transform.position;
+                targetPos.x += input.x;
+                targetPos.y += input.y;
+            }
         }
-        
+
     }
 
     
