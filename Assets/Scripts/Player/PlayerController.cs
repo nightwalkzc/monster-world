@@ -42,6 +42,8 @@ public class PlayerController : MonoBehaviour
 
             
         }
+
+        animator.SetBool("IsMove", isMove);
     }
 
     // 将玩家从当前位置移动到目标位置
