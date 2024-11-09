@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
 
     public float moveSpeed;
 
+    public LayerMask solidObjectsLayer;
+
     private bool isMove;
 
     private Vector2 input;
@@ -37,10 +39,11 @@ public class PlayerController : MonoBehaviour
                 targetPos.x += input.x;
                 targetPos.y += input.y;
 
-                StartCoroutine(Move(targetPos));
+                if(IsWalkable(targetPos))
+                {
+                    StartCoroutine(Move(targetPos));
+                }
             }
-
-            
         }
 
         animator.SetBool("IsMove", isMove);
@@ -61,5 +64,14 @@ public class PlayerController : MonoBehaviour
 
         isMove = false;
 
+    }
+
+    private bool IsWalkable(Vector3 targetPos)
+    {
+        if(Physics2D.OverlapCircle(targetPos, 0.3f, solidObjectsLayer) != null)
+        {
+            return false;
+        }
+        return true;
     }
 }
