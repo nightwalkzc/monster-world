@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -8,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed;
 
     public LayerMask solidObjectsLayer;
+    public LayerMask LongGrassLayer;
 
     private bool isMove;
 
@@ -64,6 +67,8 @@ public class PlayerController : MonoBehaviour
 
         isMove = false;
 
+        CheckForENcounters();
+
     }
 
     private bool IsWalkable(Vector3 targetPos)
@@ -73,5 +78,16 @@ public class PlayerController : MonoBehaviour
             return false;
         }
         return true;
+    }
+
+        private void CheckForENcounters()
+    {
+        if(Physics2D.OverlapCircle(transform.position, 0.2f, LongGrassLayer) != null)
+        {
+            if (UnityEngine.Random.Range(1, 101)<=10)
+            {
+                Debug.Log("遭遇一只野生妖怪");
+            }
+        }
     }
 }
