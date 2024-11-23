@@ -14,10 +14,10 @@ public class PokemonBase : ScriptableObject {
     [SerializeField] Sprite frontSprite;   // 在战斗中的前后样式
     [SerializeField] Sprite backSprite;
     
-    [SerializeField] PokemonTpye pokemonTpye1;
-    [SerializeField] PokemonTpye pokemonTpye2;
+    [SerializeField] PokemonType pokemonTpye1;
+    [SerializeField] PokemonType pokemonTpye2;
 
-    //基本属性
+    //基本属性(种族值)
     [SerializeField] int maxHp;
     [SerializeField] int attack;
     [SerializeField] int defense;
@@ -25,8 +25,7 @@ public class PokemonBase : ScriptableObject {
     [SerializeField] int spDefense;
     [SerializeField] int speed;
 
-
-
+    [SerializeField] List<LearnableMove> learnableMoves;
 
     public string Name { //使用函数获取变量而不是直接展示  & properties特性 
         get {return name;}
@@ -59,12 +58,32 @@ public class PokemonBase : ScriptableObject {
     public int Speed {
         get {return speed;}
     }
+
+    public List<LearnableMove> LearnableMoves {
+        get {return learnableMoves;}
+    }
     
 }
 
-public enum PokemonTpye
+[System.Serializable] // 作用：用于在检视器中显示
+public class LearnableMove
 {
-    None, // 不清楚的设计含义
+    [SerializeField] MoveBase moveBase;
+    [SerializeField] int level;
+
+    public MoveBase MoveBase {
+        get {return moveBase;}
+        }
+
+    public int Level {
+        get {return level;}
+    }
+
+}
+
+public enum PokemonType
+{
+    None, // 单属性宝可梦第二属性为None
     Normal,
     Fire,
     Water,
